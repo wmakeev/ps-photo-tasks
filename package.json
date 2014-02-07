@@ -1,0 +1,13 @@
+{
+    "name": "ps-photo-tasks",
+    "version": "0.1.0",
+    "author": "Vitaliy V. Makeev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wmakeev/ps-photo-tasks.git"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-webmake": "~0.1.2"
+    }
+}
