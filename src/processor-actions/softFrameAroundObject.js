@@ -18,7 +18,7 @@ module.exports = function (actionInfo) {
         frame               = tools.calculateFrame(),
         zeroUnit            = new UnitValue(0, tools.getRulerTypeAbbreviation()),
         curFrame,
-        oldUnits = preferences.rulerUnits;
+        oldUnits            = preferences.rulerUnits;
 
     defaultFrameSize = actionInfo.defaultSize ?
         UnitValue(actionInfo.defaultSize) :

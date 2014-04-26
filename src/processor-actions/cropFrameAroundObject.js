@@ -5,17 +5,22 @@
  */
 
 var cropAction = require('../photoshop-actions').crop,
-    tools = require('../tools');
+    tools = require('../tools'),
+    ruler = require('../tools/ruler');
 
 /**
  * Создает рамку вокруг объекта съемки
  * @param actionInfo
  */
 module.exports = function (actionInfo) {
+    //TODO Должна быть возможность устнавливать различные размерности для каждой из сторон!
+    ruler.setRulerUnits(actionInfo.size.left);
 
-    var frame           = tools.calculateFrame(),
-        zeroUnitValue   = '0 ' + tools.getRulerTypeAbbreviation(),
-        zeroUnit        = UnitValue(zeroUnitValue);
+    var zeroUnitValue   = '0 ' + tools.getRulerTypeAbbreviation(),
+        zeroUnit        = UnitValue(zeroUnitValue),
+        frame;
+
+    frame = tools.calculateFrame();
 
     var cropData = {
         bounds: {
@@ -34,6 +39,8 @@ module.exports = function (actionInfo) {
 
         }
     };
+
+    ruler.resetRuler();
 
     cropAction(cropData);
 

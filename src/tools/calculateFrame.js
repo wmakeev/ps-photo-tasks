@@ -5,7 +5,8 @@
  */
 
 var getRulerTypeAbbreviation = require('./getRulerTypeAbbreviation'),
-    getUnitsTypeByAbbreviation = require('./getUnitsTypeByAbbreviation');
+    getUnitsTypeByAbbreviation = require('./getUnitsTypeByAbbreviation'),
+    ruler = require('./ruler');
 
 /**
  * Возвращает координаты (UnitValue) самых крайних направляющих.
@@ -17,16 +18,8 @@ module.exports = function (units) {
     var oldUnits = preferences.rulerUnits;
         docRef = activeDocument;
 
-    if (units) {
-        var u = (units + '').split('.');
-        if (u.length == 2 && u[1] in Units) {
-            preferences.rulerUnits = units;
-        } else if (typeof units === 'string') {
-            preferences.rulerUnits = getUnitsTypeByAbbreviation(UnitValue(units).type);
-        } else {
-            throw 'calculateFrame: not supported [units] argument format'
-        }
-    }
+    //TODO  Использовать ruler.setRulerUnits(...);
+    if (units) ruler.setRulerUnits(units);
 
     var guides = activeDocument.guides,
         zeroUnit = UnitValue('0 ' + getRulerTypeAbbreviation()),
@@ -68,9 +61,7 @@ module.exports = function (units) {
         }
     }
 
-    if (units) {
-        preferences.rulerUnits = oldUnits;
-    }
+    if (units) ruler.resetRuler();
 
     return frame;
 };

@@ -4,7 +4,8 @@
  * Vitaliy V. Makeev (w.makeev@gmail.com)
  */
 
-var getUnitTypeCharId = require('./tools/getUnitTypeCharId');
+var getUnitTypeCharId = require('./tools/getUnitTypeCharId'),
+    ruler = require('../tools/ruler');
 
 /**
  * Apply crop;
@@ -17,6 +18,11 @@ var getUnitTypeCharId = require('./tools/getUnitTypeCharId');
  */
 module.exports = function (data) {
 
+    //TODO Должна быть возможность устнавливать различные размерности для каждой из сторон!
+    ruler.setRulerUnits(data.bounds.top);
+
+    ////
+    // Ps script
     var idCrop, desc317, idT, desc318, idTop, idPrc, idLeft, idBtom,
         idRght, idRctn, idAngl, idAng, idDlt,
         idcropAspectRatioModeKey, idcropAspectRatioModeClass, idunconstrained;
@@ -57,5 +63,8 @@ module.exports = function (data) {
     desc317.putEnumerated( idcropAspectRatioModeKey, idcropAspectRatioModeClass, idunconstrained );
 
     executeAction( idCrop, desc317, DialogModes.NO );
+    //
+    ////
 
+    ruler.resetRuler();
 };
